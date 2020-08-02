@@ -34,14 +34,21 @@ export default {
   },
   methods: {
     pswTest() {
-      if (this.psw1 === this.psw2) {
+      if (this.psw1&&this.psw1 === this.psw2) {
         this.psw = this.psw1;
         return 1;
       } else return 0;
     },
+    emailTest(){
+      if(/^\w+((\.|-)\w+)*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(this.email)){
+        return 1;
+      }
+      return 0;
+    },
     sub() {
-      if (!this.pswTest()) return alert("请确保两次密码输入一致");
-
+      if(!this.userName||!this.age) return alert("请完善信息！")
+      if(!this.emailTest()) return alert("请输入正确的邮箱!");
+      if (!this.pswTest()) return alert("请确保密码不为空且两次密码输入一致！");
       let data = {
         userName: this.userName,
         age: this.age,
