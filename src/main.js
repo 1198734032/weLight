@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import Axios from 'axios'
+import {Upload} from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import './assets/css/changeEle.css'
 
-// Vue.prototype.$axios = Axios
-// Axios.defaults.baseURL = '/api'
-// Axios.defaults.headers.post['Content-Type'] = 'application/json';
+Vue.use(Upload)
 
 Vue.config.productionTip = false
 

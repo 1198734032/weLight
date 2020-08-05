@@ -1,15 +1,19 @@
 <template>
   <div id="app">
-    <register/>
+    <!-- <register/> -->
+    <!-- <adminUpload/> -->
+    <!-- <index/> -->
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-import register from '@/views/register/register.vue'
 
 export default {
   components:{
-    register
+   
   }
 }
 </script>
