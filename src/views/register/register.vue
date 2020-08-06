@@ -62,7 +62,7 @@ export default {
             return alert(res.data.Msg);
           };
           alert(res.data.Msg+",即将返回登陆页面登录");
-          //this.$router.replace("/login").catch(() => {});
+          this.$router.replace("/userLogin").catch(() => {});
         })
         .catch(function (error) {
           console.log(error);

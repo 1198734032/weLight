@@ -1,7 +1,7 @@
 <template>
   <div class="admin_upload">
     <div><input id="movie_name_ipt" placeholder="请输入您将上传的电影名称" type="text" v-model="name" /></div>
-    <el-upload class="upload-demo" drag action="/upload"  :data="{'movieName':this.name}" multiple :before-upload="beforeUpload">
+    <el-upload class="upload-demo" drag action="/api/upload"  :data="{'movieName':this.name}" multiple   :on-error="on_err" :before-upload="beforeUpload" :on-success="on_success">
       <i class="el-icon-upload"></i>
       <div class="el-upload__text">
         将文件拖到此处，或
@@ -38,6 +38,14 @@ export default {
         return false;
       }
     },
+    on_success(response, file, fileList){
+      console.log(response);
+      
+    },
+    on_err(err, file, fileList){
+      console.log(err); 
+      
+    }
   },
 };
 </script>
@@ -46,7 +54,6 @@ export default {
 .admin_upload {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.651);
   display: flex;
   flex-direction: column;
   align-items: center;

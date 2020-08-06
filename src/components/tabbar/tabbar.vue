@@ -16,11 +16,11 @@ export default {
 #tab_bar{
   display: flex;
   justify-content: space-around;
-  background-color:rgba(26, 224, 158, 0.89);
+  background-color:rgb(1,182,255);
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  box-shadow: 0 -3px 1px rgba(26, 224, 158, 0.89);
+  box-shadow: 0 -3px 1px rgb(1,182,255);
 }
 </style>

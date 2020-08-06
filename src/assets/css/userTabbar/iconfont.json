@@ -1,0 +1,30 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "678104",
+      "name": "主页",
+      "font_class": "zhuye",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "12490650",
+      "name": "个人中心",
+      "font_class": "profile",
+      "unicode": "e501",
+      "unicode_decimal": 58625
+    },
+    {
+      "icon_id": "12843737",
+      "name": "创建",
+      "font_class": "chuangjian",
+      "unicode": "e735",
+      "unicode_decimal": 59189
+    }
+  ]
+}

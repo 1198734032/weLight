@@ -15,6 +15,7 @@ export default {};
   text-align: center;
   height: 49px;
   font-size: 14px;
+  color: white;
 }
 .tab_bar_item img {
   width: 24px;

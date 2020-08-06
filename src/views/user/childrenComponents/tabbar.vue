@@ -1,6 +1,6 @@
 <template>
   <tabbar>
-    <router-link to="/admin/adminHome">
+    <router-link to="/user/userHome">
       <tabbar-item path="/admin/adminHome">
         <template v-slot:item_img>
           <span class="iconfont icon-zhuye"></span>
@@ -11,13 +11,24 @@
       </tabbar-item>
     </router-link>
 
-    <router-link to="/admin/adminUpload">
-      <tabbar-item path="/admin/adminUpload">
+    <router-link to="/user/userCreate">
+      <tabbar-item path="/admin/adminHome">
         <template v-slot:item_img>
-          <span class="iconfont icon-add"></span>
+          <span class="iconfont icon-chuangjian"></span>
         </template>
         <template v-slot:item_text>
-          <div>add</div>
+          <div>create</div>
+        </template>
+      </tabbar-item>
+    </router-link>
+
+    <router-link to="/user/userPersonnal">
+      <tabbar-item path="/admin/adminUpload">
+        <template v-slot:item_img>
+          <span class="iconfont icon-profile"></span>
+        </template>
+        <template v-slot:item_text>
+          <div>personnal</div>
         </template>
       </tabbar-item>
     </router-link>
@@ -36,7 +47,7 @@ export default {
 </script>
  
 <style scoped>
-@import "~@/assets/css/adminTabbar/iconfont.css";
+@import "~@/assets/css/userTabbar/iconfont.css";
 .iconfont {
   font-size: 22px;
 }
