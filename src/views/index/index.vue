@@ -14,7 +14,7 @@ export default {
       this.$router.push("/userLogin").catch(() => {});
     },
     adminLogin() {
-      this.$router.push("/userLogin").catch(() => {});
+      this.$router.push("/adminLogin").catch(() => {});
     },
     register() {
       this.$router.push("/register").catch(() => {});

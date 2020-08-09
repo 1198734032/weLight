@@ -1,13 +1,13 @@
 <template>
   <div class="admin_upload">
     <div><input id="movie_name_ipt" placeholder="请输入您将上传的电影名称" type="text" v-model="name" /></div>
-    <el-upload class="upload-demo" drag action="/api/upload"  :data="{'movieName':this.name}" multiple   :on-error="on_err" :before-upload="beforeUpload" :on-success="on_success">
+    <el-upload class="upload-demo" drag action="http://47.97.214.211/api/upload" with-credentials :data="{'movieName':this.name}" multiple   :on-error="on_err" :before-upload="beforeUpload" :on-success="on_success">
       <i class="el-icon-upload"></i>
       <div class="el-upload__text">
         将文件拖到此处，或
         <em>点击上传</em>
       </div>
-      <div class="el-upload__tip" slot="tip">只能上传mp4文件，且不超过500MB</div>
+      <div class="el-upload__tip" slot="tip" >只能上传mp4文件，且不超过500MB</div>
     </el-upload>
   </div>
 </template>
@@ -20,6 +20,7 @@ export default {
     };
   },
   methods: {
+    //上传之前校验文件信息
     beforeUpload(file) {
       let { type, size } = file;
       //校验文件名
@@ -38,15 +39,20 @@ export default {
         return false;
       }
     },
+
+    //成功回调
     on_success(response, file, fileList){
-      console.log(response);
-      
+      console.log(response); 
+      alert('上传成功')  
     },
+
+    //失败回调
     on_err(err, file, fileList){
-      console.log(err); 
-      
+      aler("出错啦，请稍后重试！")
+      console.log(err);  
     }
   },
+
 };
 </script>
  
@@ -63,6 +69,7 @@ export default {
 #movie_name_ipt{
   width: 50vw;
   border: 1px solid black;
+  opacity: .7;
   padding: 0 10px;
   line-height: 30px;
   border-radius: 5px;

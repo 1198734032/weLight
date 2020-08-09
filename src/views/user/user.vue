@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="user">
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
@@ -18,4 +18,10 @@ export default {
 </script>
  
 <style scoped>
+.user{
+  width: 100vw;
+  height: calc(100vh - 44px);
+  overflow: scroll;
+  background: linear-gradient(to top,rgb(36,49,84), rgb(110, 111, 119));
+}
 </style>

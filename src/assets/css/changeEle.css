@@ -1,4 +1,5 @@
 .el-upload-dragger{
     width: 63vw;
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    opacity: .8;
   }

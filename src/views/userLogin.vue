@@ -37,10 +37,9 @@ export default {
       // 发送请求
       userLogin(data)
         .then((res) => {
-          console.log(res);
           if (res.data.success) {
+          this.$store.commit('setSession','user');
           return this.$router.push("/user/userHome").catch(() => {});
-
           } else {
             return alert(res.data.Msg + "，请重新输入");
           }

@@ -14,7 +14,7 @@ const userLogin = () => import('@/views/userLogin.vue')
 const userHome = () => import('@/views/user/childrenComponents/userHome.vue')
 const userCreate = () => import('@/views/user/childrenComponents/userCreate.vue')
 const userPersonnal = () => import('@/views/user/childrenComponents/userPersonnal.vue')
-
+const watchPage=()=>import('@/views/user/watchPage.vue')
 
 
 
@@ -62,12 +62,16 @@ const routes = [
     ]
   },
   {
+    path:'/watchPage',
+    component:watchPage
+  },
+  {
     path: '/user',
     component: user,
     children: [
       {
-        path:'',
-        redirect:'userHome'
+        path: '',
+        redirect: 'userHome'
       },
       {
         path: 'userHome',
@@ -89,6 +93,43 @@ const router = new VueRouter({
   // mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+
+let adminPath = ['/admin', '/admin/adminUpload', '/admin/adminHome']
+let userPath = ['/user', '/user/userHome', '/user/userCreate', '/user/userPersonnal']
+let whitePath = ['/index', '/userLogin', '/adminLogin','/register']
+
+// 路由守卫
+router.beforeEach((to, from, next) => {
+  
+  if (sessionStorage.getItem('id') === 'user') {
+    if (userPath.indexOf(to.fullPath) !==-1|| whitePath.indexOf(to.fullPath)!==-1) {      
+      next();
+    } else {
+      alert("您暂时没有权限噢！");
+      next(from.fullPath)
+    }
+  }
+
+  else if (sessionStorage.getItem('id') === 'admin') {
+    if (adminPath.indexOf(to.fullPath)!==-1 || whitePath.indexOf(to.fullPath)!==-1) {
+      next();
+    } else {
+      alert("您暂时没有权限噢！");
+      next(from.fullPath)
+    }
+  }
+
+  else if (whitePath.indexOf(to.fullPath)!==-1) {
+    next()
+  }
+
+  else {   
+    alert("您暂时没有权限噢！");
+    next('/index')
+  }
+
 })
 
 export default router

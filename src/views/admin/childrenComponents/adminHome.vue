@@ -1,5 +1,6 @@
 <template>
   <div class="adminHome">
+    <div class="title">所有影片</div>
     <div v-for="item in movieList" :key="item.movieId" class="container">
       <div class="movie_name">{{item.movieName}}</div>
       <div class="del" @click="del(item.movieId)">
@@ -11,65 +12,68 @@
  
 <script>
 import { getMovie } from "@/network/getMovie/getMovie.js";
-import { delMovie } from "@/network/adminAll/adminAll.js"; 
+import { delMovie } from "@/network/adminAll/adminAll.js";
 export default {
   data() {
     return {
       movieList: [
         // {
-        //   movieId: 1,
+        //   movieId: "999",
         //   src: "xxx",
-        //   movieName: "alabalalasealabalalasealabalalasealabalalasealabalalasealabalalasealabalalasealabalalase",
-        // },
-        // {
-        //   movieId: 10,
-        //   src: "xxx",
-        //   movieName: "sdjfleifjg",
-        // },
+        //   movieName: "暂无影片信息",
+        // }
       ],
     };
   },
   methods: {
     del(id) {
-      delMovie(id).then((res) => {
-        console.log(res);
-
-        if (!res.data.success) return aler("出错啦~");
-        getMovie().then((res) => {
-          this.movieList = res.data.movieList;
-          this.$forceUpdate();
+      delMovie(id)
+        .then((res) => {
+          console.log(res);
+          if (!res.data.success) return aler("出错啦~");
+          getMovie().then((res) => {
+            this.movieList = res.data.movieList;
+            this.$forceUpdate();
+          });
+          alert(res.data.Msg);
+        })
+        .catch((err) => {
+          console.log(err);
         });
-        alert(res.data.Msg);
-      });
     },
 
-    /** */
   },
-//   created() {
-//     getMovie().then((res) => {
-//       console.log(res);
 
-//       if (!res.data.success) return alert("出错啦！");
-//       this.movieList = res.data.movieList;
-//     });
-//   },
-  /** */
+  // 加载首页的电影信息
+  activated() {
+    getMovie().then((res) => {
+      console.log(res);
+      if (!res.data.success) return alert("影片加载出错啦！");
+      this.movieList = res.data.data.movieList;
+      this.$forceUpdate();
+    });
+  },
 };
 </script>
  
 <style scoped>
 @import "~@/assets/css/adminTabbar/iconfont.css";
+.title {
+  padding: 8px 20px;
+  background-color: rgb(104,200,215);
+  border-radius: 0 0 5px 5px;
+}
 .adminHome {
   display: flex;
   align-items: center;
   flex-direction: column;
+  color: white;
 }
 .container {
   margin: 5vw;
   width: 50vw;
-  padding: 30px 40px 30px 30px;
-  background-color: rgb(235, 128, 226);
-  color: white;
+  padding: 30px 40px 30px 15px;
+  background-color: rgb(104,200,215);
   position: relative;
   border-radius: 8px;
 }
@@ -81,5 +85,6 @@ export default {
   position: absolute;
   right: 15px;
   top: 40%;
+  cursor: pointer;
 }
 </style>

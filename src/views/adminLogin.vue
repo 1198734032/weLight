@@ -10,6 +10,7 @@
 <script>
 // import { setCookie, getCookie } from "../../assets/js/cookie.js";
 import { adminLogin } from "@/network/adminLogin/adminLogin.js";
+
 import login from "@/components/login/login.vue";
 export default {
   components: {
@@ -32,18 +33,21 @@ export default {
         adminName: this.userName,
         password: this.password,
       };
-      console.log(data);
-
+      
       // 发送请求
       adminLogin(data).then((res) => {
-        console.log(res);
         if (res.data.success) {
+          //设置session
+           this.$store.commit('setSession','admin');
           return this.$router.push("/admin/adminHome").catch(() => {});
 
         } else {
           return alert(res.data.Msg + "，请重新输入");
         }
-      });
+      })
+      .catch(err=>{
+        console.log(err);
+      })
     },
   },
 
