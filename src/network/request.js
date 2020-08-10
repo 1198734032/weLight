@@ -4,7 +4,7 @@ axios.defaults.withCredentials = true;
 
 export function request(config){
     const instance = axios.create({
-        baseURL:'//47.97.214.211/api',
+        baseURL:'http://47.97.214.211/api',
         timeout:10000,
         headers:{
             'Content-Type':'application/json'
