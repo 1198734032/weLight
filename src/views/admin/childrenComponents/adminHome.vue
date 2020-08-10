@@ -31,15 +31,16 @@ export default {
         .then((res) => {
           console.log(res);
           if (!res.data.success) return aler("出错啦~");
-          getMovie().then((res) => {
-            this.movieList = res.data.movieList;
+          getMovie().then((res1) => {
+            this.movieList = res1.data.data.movieList;
             this.$forceUpdate();
           });
-          alert(res.data.Msg);
+         alert(res.data.Msg);
         })
         .catch((err) => {
           console.log(err);
         });
+          
     },
 
   },

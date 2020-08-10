@@ -101,8 +101,8 @@ export default {
 
       createRoom(this.forms.type, data)
       .then((res) =>{
-        if(!res.data.success) return alert(res.data.Msg)
         console.log(res);
+        if(!res.data.success) return alert(res.data.Msg)
         this.$router.push("/watchPage").catch(() => {});
 
         // alert("创建成功！")

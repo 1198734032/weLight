@@ -97,7 +97,7 @@ const router = new VueRouter({
 
 
 let adminPath = ['/admin', '/admin/adminUpload', '/admin/adminHome']
-let userPath = ['/user', '/user/userHome', '/user/userCreate', '/user/userPersonnal']
+let userPath = ['/user', '/user/userHome', '/user/userCreate', '/user/userPersonnal','/watchPage']
 let whitePath = ['/index', '/userLogin', '/adminLogin','/register']
 
 // 路由守卫
