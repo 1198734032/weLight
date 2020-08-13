@@ -6,7 +6,7 @@ module.exports = {
 
     devServer: {
         open: true, //是否自动弹出浏览器页面
-        // https: true,
+        // https: false,
         hot:true,
         //hotOnly:false,
         // proxy: {
