@@ -56,7 +56,7 @@ export default {
           if (!res.data.success) return alert("加入房间失败啦,重新试试！");
           // alert("加入房间成功啦");
           this.$router.push({path:"/watchPage",query:{
-            src:res.data.data.movie.src
+            src:res.data.data.room.movie.src
         }}).catch(() => {});
         this.password="";
         });
