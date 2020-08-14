@@ -56,14 +56,18 @@ export default {
           if (!res.data.success) return alert("加入房间失败啦,重新试试！");
           // alert("加入房间成功啦");
           console.log(res)
-          this.$router.push("/watchPage").catch(() => {});
+          this.$router.push({path:"/watchPage",query:{
+            src:res.data.data.room.movie.src
+        }}).catch(() => {});
         });
       } else {
         enterPublic(id).then((res) => {
           if (!res.data.success) return alert("加入房间失败啦,重新试试！");
           // alert("加入房间成功啦");
           console.log(res)
-          this.$router.push("/watchPage").catch(() => {});
+          this.$router.push({path:"/watchPage",query:{
+            src:res.data.data.room.movie.src
+        }}).catch(() => {});
         });
       }
     },

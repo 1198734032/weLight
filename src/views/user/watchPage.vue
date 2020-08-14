@@ -1,8 +1,8 @@
 <template>
   <div class="watch_page">
-    <video width="100%"   controls  id="movie">
-      <source ref="video"  type="video/mp4" >
-    </video>
+        <video width="100%" controls id="video">
+          <source ref="video">
+        </video>
     <div id="welcome">❄ 欢迎来一起看电影 ❄<br/>和大家聊聊吧~</div>
     <div id="chat"></div>
   </div>
@@ -12,17 +12,16 @@
 export default {
   props: {
     src: {
-      default: " ",
+      default: "http://vjs.zencdn.net/v/oceans.mp4",
       type: String,
     },
   },
-// `http://${this.src}.mp4`
-
+  
   mounted() {
-    // this.$refs.video.src=this.src;
-    this.$refs.video.src=require()
+    this.src=this.$route.query.src;  
+    this.$refs.video.src=this.src
   },
-};
+ };
 </script>
  
 <style scoped>
@@ -32,6 +31,9 @@ export default {
   overflow-y: scroll;
   color: white;
   background: linear-gradient(to top, rgb(36, 49, 84), rgb(110, 111, 119));
+}
+#video{
+  background-color: black;
 }
 #welcome{
   padding: 10px 0;

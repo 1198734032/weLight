@@ -101,9 +101,12 @@ export default {
 
       createRoom(this.forms.type, data)
       .then((res) =>{
-        console.log(res);
+        console.log(res)
         if(!res.data.success) return alert(res.data.Msg)
-        this.$router.push("/watchPage").catch(() => {});
+        this.$router.push({path:"/watchPage",query:{
+            src:res.data.data.room.movie.src
+        }}).catch(() => {});
+
 
         // alert("创建成功！")
       });
