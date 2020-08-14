@@ -76,8 +76,6 @@ export default {
     //展示电影
     showMovie() {
       getMovie().then((res) => {
-        console.log(res);
-        
         if (!res.data.success) return alert("影片加载出错啦！");
         this.movieList = res.data.data.movieList;
         this.$forceUpdate();
@@ -101,7 +99,6 @@ export default {
 
       createRoom(this.forms.type, data)
       .then((res) =>{
-        console.log(res)
         if(!res.data.success) return alert(res.data.Msg)
         this.$router.push({path:"/watchPage",query:{
             src:res.data.data.room.movie.src

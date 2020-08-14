@@ -9,7 +9,7 @@
         <input
           class="psw"
           v-model="password"
-          v-if="item.type=='私密' "
+          v-if="item.type=='private' "
           type="password"
           placeholder="私密房间，点击输入密码"
         />
@@ -55,16 +55,14 @@ export default {
         enterprivate(id, this.password).then((res) => {
           if (!res.data.success) return alert("加入房间失败啦,重新试试！");
           // alert("加入房间成功啦");
-          console.log(res)
           this.$router.push({path:"/watchPage",query:{
-            src:res.data.data.room.movie.src
+            src:res.data.data.movie.src
         }}).catch(() => {});
+        this.password="";
         });
       } else {
         enterPublic(id).then((res) => {
           if (!res.data.success) return alert("加入房间失败啦,重新试试！");
-          // alert("加入房间成功啦");
-          console.log(res)
           this.$router.push({path:"/watchPage",query:{
             src:res.data.data.room.movie.src
         }}).catch(() => {});
@@ -77,9 +75,10 @@ export default {
   // 加载时获取房间列表
   activated() {
     getRoom().then((res) => {
-      console.log(res);
       if (!res.data.success) return alert("房间加载出错啦~");
       this.roomList = res.data.data.roomList;
+      console.log(this.roomList);
+      
     });
   },
   /** */
@@ -125,5 +124,6 @@ export default {
   border-radius: 2px;
   background-color: rgb(104, 200, 215);
   border: 1px solid white;
+  cursor: pointer;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="admin_upload">
     <div><input id="movie_name_ipt" placeholder="请输入您将上传的电影名称" type="text" v-model="name" /></div>
-    <el-upload class="upload-demo" drag action="http://47.97.214.211/api/upload" with-credentials :data="{'movieName':this.name}" multiple   :on-error="on_err" :before-upload="beforeUpload" :on-success="on_success">
+    <el-upload class="upload-demo" drag action="https://47.97.214.211/api/upload" with-credentials :data="{'movieName':this.name}" multiple   :on-error="on_err" :before-upload="beforeUpload" :on-success="on_success">
       <i class="el-icon-upload"></i>
       <div class="el-upload__text">
         将文件拖到此处，或
