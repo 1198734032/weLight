@@ -104,7 +104,9 @@ let whitePath = ['/index', '/userLogin', '/adminLogin','/register']
 router.beforeEach((to, from, next) => {
   
   if (sessionStorage.getItem('id') === 'user') {
-    if (userPath.indexOf(to.fullPath) !==-1|| whitePath.indexOf(to.fullPath)!==-1) {      
+    console.log(to);
+
+    if (userPath.indexOf(to.path) !==-1|| whitePath.indexOf(to.path)!==-1) {      
       next();
     } else {
       alert("您暂时没有权限噢！");

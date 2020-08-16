@@ -8,13 +8,15 @@
         <div>正在放映: {{item.movie.movieName}}</div>
         <input
           class="psw"
-          v-model="password"
+          v-model="item.ipt"
           v-if="item.type=='private' "
           type="password"
           placeholder="私密房间，点击输入密码"
         />
       </div>
-      <div class="right" @click="join(item.roomId,item.type)">我要加入</div>
+      <div class="right" @click="join(item)">我要加入</div>
+
+      <!-- <div class="right" @click="join(item.roomId,item.type)">我要加入</div> -->
     </div>
   </div>
 </template>
@@ -48,12 +50,13 @@ export default {
 
   methods: {
     //进入房间
-    join(id, type) {
-      //检测房间类型
-      if (type == "私密") {
-        if (!this.password) return alert("请输入密码");
-        enterprivate(id, this.password).then((res) => {
-          if (!res.data.success) return alert("加入房间失败啦,重新试试！");
+    // join(id, type) {
+    join(item) {      
+      // 检测房间类型
+      if (item.type === "private") {
+        if (!item.ipt) return alert("请输入密码");
+        enterprivate(item.roomId, item.ipt).then((res) => {
+          if (!res.data.success) return alert(res.data.Msg);
           // alert("加入房间成功啦");
           this.$router.push({path:"/watchPage",query:{
             src:res.data.data.room.movie.src
@@ -61,8 +64,8 @@ export default {
         this.password="";
         });
       } else {
-        enterPublic(id).then((res) => {
-          if (!res.data.success) return alert("加入房间失败啦,重新试试！");
+        enterPublic(item.roomId).then((res) => {
+          if (!res.data.success) return alert(res.data.Msg);
           this.$router.push({path:"/watchPage",query:{
             src:res.data.data.room.movie.src
         }}).catch(() => {});
@@ -76,10 +79,8 @@ export default {
   activated() {
     getRoom().then((res) => {
       if (!res.data.success) return alert("房间加载出错啦~");
-      this.roomList = res.data.data.roomList;
-      console.log(this.roomList);
-      
-    });
+      this.roomList = res.data.data.roomList;   
+    })
   },
   /** */
 };
