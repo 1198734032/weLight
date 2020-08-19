@@ -76,6 +76,7 @@ export default {
     //聊天
     subMsg() {
       if (!this.$store.state.user.userName) return alert("请先登录！");
+      if(!this.my_ipt) return alert("发送内容不能为空哟~")
       this.websocket.send(
         JSON.stringify({
           text: this.my_ipt,
