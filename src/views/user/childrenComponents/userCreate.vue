@@ -41,22 +41,13 @@ export default {
         //   movieId: "1",
         //   src: "xxx",
         //   movieName: "影片3",
-        // },
-        // {
-        //   movieId: "2",
-        //   src: "xxx",
-        //   movieName: "影片1",
-        // },
-        // {
-        //   movieId: "3",
-        //   src: "xxx",
-        //   movieName: "影片2",
-        // },
+        // }
       ],
       show: false,
+      submitClick: false,
       forms: {
         roomName: "",
-        movieId: "2",
+        movieId: "",
         password: "",
         type: "private",
       },
@@ -75,12 +66,14 @@ export default {
 
     //展示电影
     showMovie() {
-      getMovie().then((res) => {
-        if (!res.data.success) return alert("影片加载出错啦！");
-        this.movieList = res.data.data.movieList;
-        this.$forceUpdate();
-      });
-      if (!this.show) this.show = true;
+      if (!this.show) {
+        getMovie().then((res) => {
+          if (!res.data.success) return alert("影片加载出错啦！");
+          this.movieList = res.data.data.movieList;
+          this.$forceUpdate();
+        });
+        if (!this.show) this.show = true;
+      }
     },
 
     //选择电影，相应数据变化
@@ -90,27 +83,37 @@ export default {
 
     //确认创建
     submit() {
-      let data = {
-        roomName: this.forms.roomName,
-        movieId: this.forms.movieId,
-        password: this.forms.password,
-        type: this.forms.type,
-      };
+      if (!this.forms.roomName || !this.forms.movieId)
+        return alert("请完善信息");
 
-      createRoom(this.forms.type, data)
-      .then((res) =>{
-        if(!res.data.success) return alert(res.data.Msg)
-        this.$router.push({path:"/watchPage",query:{
-            src:res.data.data.room.movie.src
-        }}).catch(() => {});
+      if (!this.submitClick) {
+        this.submitClick = true;
+        let data = {
+          roomName: this.forms.roomName,
+          movieId: this.forms.movieId,
+          password: this.forms.password,
+          type: this.forms.type,
+        };
 
+        createRoom(this.forms.type, data).then((res) => {
+          if (!res.data.success) return alert(res.data.Msg);
+          console.log(res)
+          this.$router
+            .push({
+              name: "watchPage",
+              params: {
+                room: res.data.data.room,
+              },
+            })
+            .catch(() => {});
+          // alert("创建成功！")
+        });
 
-        // alert("创建成功！")
-      });
-
-      this.forms.roomName = "";
-      this.forms.password = "";
-      this.show = false;
+        this.forms.roomName = "";
+        this.forms.password = "";
+        this.show = false;
+        this.submitClick = false;
+      }
     },
   },
 };
@@ -171,5 +174,7 @@ export default {
 }
 #show {
   padding: 0 0 20px 0;
+  height: 100px;
+  overflow-y: scroll;
 }
 </style>

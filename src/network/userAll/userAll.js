@@ -4,34 +4,44 @@ export function getRoom() {
     return request({
         method: "get",
         url: "/rooms"
-    }) 
+    })
 }
 
-export function createRoom(url,data){
+export function createRoom(url, data) {
     return request({
         method: "post",
         url: `/${url}`,
-        data:data
-    }) 
+        data: data
+    })
 }
 
-export function enterPublic(id,password=""){
+export function enterPublic(id, password = "") {
     return request({
         method: "get",
         url: "/enterpublic",
-        params:{
-            roomId:id
+        params: {
+            roomId: id
         }
-    }) 
+    })
 }
 
-export function enterprivate(id,password){
+export function enterprivate(id, password) {
     return request({
         method: "post",
         url: "/enterprivate",
-        data:{
-            roomId:id,
-            password:password
+        data: {
+            roomId: id,
+            password: password
         }
-    }) 
+    })
+}
+
+export function deleteRoom(roomId) {
+    return request({
+        method: 'get',
+        url: '/deleteRoom',
+        params: {
+            roomId
+        }
+    })
 }

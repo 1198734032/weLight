@@ -26,11 +26,12 @@ export default {
     };
   },
   methods: {
+    //管理员删除影片
     del(id) {
       delMovie(id)
         .then((res) => {
           console.log(res);
-          if (!res.data.success) return aler("出错啦~");
+          if (!res.data.success) return alert("正在放映，不能删~~");
           getMovie().then((res1) => {
             this.movieList = res1.data.data.movieList;
             this.$forceUpdate();
