@@ -45,3 +45,21 @@ export function deleteRoom(roomId) {
         }
     })
 }
+
+export function getInformation(){
+    return request({
+        method:'get',
+        url:'/editor',
+        params:{
+            userId:sessionStorage.getItem('userId')
+        }
+    })
+}
+
+export function changeInformation(data){
+    return request({
+        method:'post',
+        url:'/editing',
+        data:data
+    })
+}

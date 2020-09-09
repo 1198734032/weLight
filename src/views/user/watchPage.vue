@@ -1,8 +1,15 @@
 <template>
   <div class="watch_page">
-    <video width="100%" controls id="video">
+    <!-- <video width="100%" controls id="video">
       <source ref="video" />
-    </video>
+    </video> -->
+    <video-player
+          ref="videoPlayer"
+          class="video-player vjs-custom-skin"
+          id="vedio"
+          :playsinline="true"
+          :options="playerOptions"
+    />
     <div class="operate">
       <span @click="goHome" class="operate_box">退出房间</span>
       <span @click="delRoom(room.roomId)" class="operate_box">解散房间</span>
@@ -25,8 +32,14 @@
  
 <script>
 import { deleteRoom } from "@/network/userAll/userAll.js";
+// import 'video.js/dist/video-js.css'
+ 
+// import { videoPlayer } from 'vue-video-player'
 
 export default {
+  //  components: {
+  //   videoPlayer
+  // },
   data() {
     return {
       isConnect: false,
@@ -38,13 +51,40 @@ export default {
         //   name:"tyh"
         // },
       ],
+     playerOptions: {
+        autoplay: false, // 如果true,浏览器准备好时开始回放。
+        muted: false, // 默认情况下将会消除任何音频。
+        loop: false, // 导致视频一结束就重新开始。
+        preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
+        language: 'zh-CN',
+        aspectRatio: '4:3', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
+        fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
+        sources: [{
+          type: 'application/x-mpegURL', // 这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
+          // type:'video/mp4',
+          // src: 'http://ivi.bupt.edu.cn/hls/cctv1.m3u8'// 视频url地址 
+          // src:'http://47.97.214.211/hls/test2.m3u8'
+          src:""
+        }],
+        live:true,
+        width: document.documentElement.clientWidth, //播放器宽度
+        notSupportedMessage: '此视频暂无法播放，请稍后再试', // 允许覆盖Video.js无法播放媒体源时显示的默认信息。
+        controlBar: {
+          // timeDivider: true,
+          durationDisplay: true,
+          remainingTimeDisplay: false,
+          fullscreenToggle: true // 全屏按钮
+        }
+
+      }
     };
   },
 
   //加载电影资源，建立websocket链接
   mounted: function () {
-    this.room = this.$route.params.room;
-    this.$refs.video.src = this.room.movie.src;
+    // this.room = this.$route.params.room;
+    // this.$refs.video.src = this.room.movie.src;
+    this.playerOptions.sources[0].src='/hls/test2.m3u8'
     this.initWebsocket();
   },
 
@@ -75,12 +115,13 @@ export default {
 
     //聊天
     subMsg() {
-      if (!this.$store.state.user.userName) return alert("请先登录！");
+      if (!sessionStorage.getItem('userName')) return alert("请先登录！");
       if(!this.my_ipt) return alert("发送内容不能为空哟~")
       this.websocket.send(
         JSON.stringify({
           text: this.my_ipt,
-          name: this.$store.state.user.userName,
+          // name: this.$store.state.user.userName,
+          name:sessionStorage.getItem('userName'),
         })
       );
       this.my_ipt = "";
@@ -169,6 +210,8 @@ export default {
   display: flex;
   padding: 10px;
   justify-content: space-around;
+  background-color: rgb(36,49,84);
+
 }
 .my_text {
   line-height: 30px;
@@ -185,8 +228,7 @@ export default {
   background-color: rgb(104, 200, 215);
   color: white;
 }
-.chat_box {
-}
+
 .chat_msg {
   padding: 0 10px;
   height: calc(100vh - 250px - 90px);
