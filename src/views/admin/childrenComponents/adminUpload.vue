@@ -75,5 +75,8 @@ export default {
   border-radius: 5px;
   margin-bottom: 8vh;
 }
-
+.el-upload-list{
+  width: 60vw;
+  margin:0 auto
+}
 </style>

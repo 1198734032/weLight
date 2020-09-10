@@ -14,6 +14,9 @@ module.exports = {
                 target: 'http://47.97.214.211:81/',
                 // target:'http://127.0.0.1:3000',
                 changeOrigin: true,
+                pathRewrite: {
+                    '^/': '/'     //      代表重写，前边的是匹配规则，后边的是写入规则
+                  }
             }
         },
     }

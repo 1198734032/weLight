@@ -63,8 +63,8 @@ export default {
           type: "application/x-mpegURL", // 这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
           // type:'video/mp4',
           // src: 'http://ivi.bupt.edu.cn/hls/cctv1.m3u8'// 视频url地址 
-          // src:'/hls/1233.m3u8'
-          // src:""
+          // src:'/hls/me.m3u8'
+          src:""
         }],
         live:true,
         width: document.documentElement.clientWidth, //播放器宽度
@@ -83,11 +83,13 @@ export default {
   //加载电影资源，建立websocket链接
   mounted: function () {
     this.room = this.$route.params.room;
-    // this.$refs.video.src = this.room.movie.src;
     
     this.room.movie.src = this.room.movie.src.slice(23);
     // console.log("src-------"+this.room.movie.src);
-    this.playerOptions.sources[0].src=this.room.movie.src;
+    // this.playerOptions.sources[0].src='http://ivi.bupt.edu.cn/hls/cctv1.m3u8';
+    // this.playerOptions.sources[0].src='/hls/me.m3u8';
+    this.playerOptions.sources[0].src =  this.room.movie.src 
+
     this.initWebsocket();
   },
 
@@ -99,7 +101,7 @@ export default {
         //通知正在房间的人房间解散
         this.websocket.send(
         JSON.stringify({
-         msg:`房间已被${this.$store.state.user.userName}解散，即将返回首页!`
+         msg:`房间已被${sessionStorage.getItem('userName')}解散，即将返回首页!`
         })
       );
         // alert(res.data.Msg + "即将返回首页");
