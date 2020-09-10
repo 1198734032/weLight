@@ -34,7 +34,7 @@
 import { deleteRoom } from "@/network/userAll/userAll.js";
 // import 'video.js/dist/video-js.css'
  
-// import { videoPlayer } from 'vue-video-player'
+// import { videoPlayer } from 'vue-videos-player'
 
 export default {
   //  components: {
@@ -60,11 +60,11 @@ export default {
         aspectRatio: '4:3', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
         fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
         sources: [{
-          type: 'application/x-mpegURL', // 这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
+          type: "application/x-mpegURL", // 这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
           // type:'video/mp4',
           // src: 'http://ivi.bupt.edu.cn/hls/cctv1.m3u8'// 视频url地址 
-          // src:'http://47.97.214.211/hls/test2.m3u8'
-          src:""
+          // src:'/hls/1233.m3u8'
+          // src:""
         }],
         live:true,
         width: document.documentElement.clientWidth, //播放器宽度
@@ -82,9 +82,12 @@ export default {
 
   //加载电影资源，建立websocket链接
   mounted: function () {
-    // this.room = this.$route.params.room;
+    this.room = this.$route.params.room;
     // this.$refs.video.src = this.room.movie.src;
-    this.playerOptions.sources[0].src='/hls/test2.m3u8'
+    
+    this.room.movie.src = this.room.movie.src.slice(23);
+    // console.log("src-------"+this.room.movie.src);
+    this.playerOptions.sources[0].src=this.room.movie.src;
     this.initWebsocket();
   },
 

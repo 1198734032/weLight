@@ -7,11 +7,14 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/css/changeEle.css';
 
-// import VideoPlayer from 'vue-video-player'
-// import 'video.js/dist/video-js.css'
-// import 'vue-video-player/src/custom-theme.css'
+import 'video.js/dist/video-js.css'
+import 'vue-video-player/src/custom-theme.css'
+import VideoPlayer from 'vue-video-player'
 
-// Vue.use(VideoPlayer)
+Vue.use(VideoPlayer)
+
+const hls = require('videojs-contrib-hls')
+Vue.use(hls)
 // Vue.use(Upload);
 // Vue.use(Form);
 // Vue.use(Button);

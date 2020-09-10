@@ -41,6 +41,8 @@ export default {
           this.$store.commit('setSession','user');
           this.$store.commit('setUser',res.data.data.user)  
           sessionStorage.setItem('userId',res.data.data.user.userId);
+          sessionStorage.setItem('userName',res.data.data.user.userName);
+
           return this.$router.push("/user/userHome").catch(() => {});
           } else {
             return alert(res.data.Msg + "，请重新输入");
