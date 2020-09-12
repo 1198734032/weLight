@@ -123,7 +123,6 @@ export default {
 
 .box-card {
   margin: 0 auto;
-  width: 100vw;
 }
 
 .personal-msg /deep/ .el-card {
