@@ -105,35 +105,35 @@ let userPath = ['/user', '/user/userHome', '/user/userCreate', '/user/userPerson
 let whitePath = ['/index', '/userLogin', '/adminLogin','/register']
 
 // 路由守卫
-// router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   
-//   if (sessionStorage.getItem('id') === 'user') {
-//     if (userPath.indexOf(to.path) !==-1|| whitePath.indexOf(to.path)!==-1) {      
-//       next();
-//     } else {
-//       alert("您暂时没有权限噢！");
-//       next(from.fullPath)
-//     }
-//   }
+  if (sessionStorage.getItem('id') === 'user') {
+    if (userPath.indexOf(to.path) !==-1|| whitePath.indexOf(to.path)!==-1) {      
+      next();
+    } else {
+      alert("您暂时没有权限噢！");
+      next(from.fullPath)
+    }
+  }
 
-//   else if (sessionStorage.getItem('id') === 'admin') {
-//     if (adminPath.indexOf(to.fullPath)!==-1 || whitePath.indexOf(to.fullPath)!==-1) {
-//       next();
-//     } else {
-//       alert("您暂时没有权限噢！");
-//       next(from.fullPath)
-//     }
-//   }
+  else if (sessionStorage.getItem('id') === 'admin') {
+    if (adminPath.indexOf(to.fullPath)!==-1 || whitePath.indexOf(to.fullPath)!==-1) {
+      next();
+    } else {
+      alert("您暂时没有权限噢！");
+      next(from.fullPath)
+    }
+  }
 
-//   else if (whitePath.indexOf(to.fullPath)!==-1) {
-//     next()
-//   }
+  else if (whitePath.indexOf(to.fullPath)!==-1) {
+    next()
+  }
 
-//   else {   
-//     alert("您暂时没有权限噢！");
-//     next('/index')
-//   }
+  else {   
+    alert("您暂时没有权限噢！");
+    next('/index')
+  }
 
-// })
+})
 
 export default router

@@ -29,7 +29,7 @@ export default {
         return false
       }
       //校验文件格式
-      if (!/(mp4)|(png)/i.test(type)) {
+      if (!/(mp4)|(flv)/i.test(type)) {
         alert("文件格式不正确");
         return false;
       }
