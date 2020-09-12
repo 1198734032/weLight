@@ -3,3 +3,12 @@
     /* border: 1px solid black; */
     opacity: .8;
   }
+
+.el-message-box,.el-message{
+  width: 70vw;
+}
+
+.el-drawer__open .el-drawer.ttb {
+  height: 50vh !important;
+  padding: 0 20px;
+}

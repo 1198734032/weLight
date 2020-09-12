@@ -22,19 +22,34 @@ export default {
   methods: {
     //上传之前校验文件信息
     beforeUpload(file) {
-      let { type, size } = file;
+      let { type, size ,name} = file;
+       console.log(file)
       //校验文件名
       if(!this.name){
-        alert("请输入您将上传的电影名称后重新上传");
+          this.$alert('请先输入电影名称，然后上传', '提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+          }
+        });
         return false
       }
       //校验文件格式
-      if (!/(mp4)|(flv)/i.test(type)) {
-        alert("文件格式不正确");
+      if (!/(mp4)|(flv)/i.test(name)) {
+        console.log(file)
+        this.$alert('文件格式不正确', '提示', {
+          confirmButtonText: '确定',
+           callback: action => {
+          }
+        });
         return false;
       }
       //校验文件大小（500MB）
       if (size > 500 * 1024 * 1024) {
+        this.$alert('文件太大啦', '提示', {
+          confirmButtonText: '确定',
+           callback: action => {
+          }
+        });
         alert("文件太大啦");
         return false;
       }

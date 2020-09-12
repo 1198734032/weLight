@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <back/>
     <login @login="login"></login>
   </div>
 </template>
@@ -11,9 +12,12 @@
 // import { setCookie, getCookie } from "../../assets/js/cookie.js";
 import { userLogin } from "@/network/userLogin/userLogin.js";
 import login from "@/components/login/login.vue";
+import back from "@/components/back/back.vue";
+
 export default {
   components: {
     login,
+    back
   },
   data() {
     return {

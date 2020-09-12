@@ -30,20 +30,26 @@ export default {
     del(id) {
       delMovie(id)
         .then((res) => {
-          console.log(res);
-          if (!res.data.success) return alert("正在放映，不能删~~");
+          if (!res.data.success) {
+            this.$alert("正在放映，不能删~~", "提示", {
+              confirmButtonText: "确定",
+              callback: (action) => {},
+            });
+             return;
+          }
           getMovie().then((res1) => {
             this.movieList = res1.data.data.movieList;
             this.$forceUpdate();
           });
-         alert(res.data.Msg);
+           this.$alert(res.data.Msg, "提示", {
+              confirmButtonText: "确定",
+              callback: (action) => {},
+            });
         })
         .catch((err) => {
           console.log(err);
         });
-          
     },
-
   },
 
   // 加载首页的电影信息
@@ -62,7 +68,7 @@ export default {
 @import "~@/assets/css/adminTabbar/iconfont.css";
 .title {
   padding: 8px 20px;
-  background-color: rgb(104,200,215);
+  background-color: rgb(104, 200, 215);
   border-radius: 0 0 5px 5px;
 }
 .adminHome {
@@ -75,7 +81,7 @@ export default {
   margin: 5vw;
   width: 50vw;
   padding: 30px 40px 30px 15px;
-  background-color: rgb(104,200,215);
+  background-color: rgb(104, 200, 215);
   position: relative;
   border-radius: 8px;
 }

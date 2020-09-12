@@ -1,5 +1,6 @@
 <template>
   <div id="register_page">
+    <back/>
     <div class="register">
       <p id="title">欢迎注册</p>
       <div>请输入用户名:</div>
@@ -21,7 +22,12 @@
 
 <script>
 import { register } from "@/network/register/register.js";
+import back from "@/components/back/back.vue";
+
 export default {
+    components: {
+    back
+  },
   data() {
     return {
       userName: "",

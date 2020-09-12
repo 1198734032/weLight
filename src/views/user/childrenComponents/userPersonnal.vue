@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="personal-msg">
-      <el-card class="box-card">
+      <el-card class="box-card" id="head">
         <div slot="header">
           <span class="title">个人资料</span>
           <el-button @click="drawer = true" type="primary" style="float: right; padding:  5px">修改资料</el-button>
@@ -41,6 +41,9 @@
           <span>{{user.password}}</span>
         </div>
       </el-card>
+      <div id="exit">
+        <button @click="exit()">退出登录</button>
+      </div>
     </div>
   </div>
 </template>
@@ -80,10 +83,18 @@ export default {
 
   methods: {
     handleClose(done) {
-      done()
+      done();
     },
 
     storge() {
+      if(!this.formLabelAlign.changeEmail||!this.formLabelAlign.changeAge||! this.formLabelAlign.changePassword){
+         this.$alert('请确保输入完整信息', '提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+          }
+         })
+         return;
+      }
       let data = {
         userName: this.user.userName,
         age: this.formLabelAlign.changeAge,
@@ -96,15 +107,38 @@ export default {
       changeInformation(data).then((res) => {
         // if(!res.data.data.success) return alert("出错啦~")
         // this.handleClose()
-        alert(res.data.Msg);
-        this.user = res.data.data.user;
+        this.$alert(res.data.Msg, "提示", {
+          confirmButtonText: "确定",
+          callback: (action) => {
+            this.user = res.data.data.user;
+          },
+        });
       });
+    },
+
+    exit() {
+      this.$confirm("是否退出登录？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          sessionStorage.removeItem("userId");
+          sessionStorage.removeItem("userName");
+          sessionStorage.removeItem("id");
+          this.$message({
+            type: "success",
+            message: "退出成功!",
+          });
+          this.$router.replace("/").catch(() => {});
+        })
+        .catch(() => {});
     },
   },
 };
 </script scoped>
 
-<style>
+<style scoped>
 .text {
   width: 100%;
   height: 30px;
@@ -145,6 +179,17 @@ export default {
 }
 .el-row {
   text-align: center;
+}
+#exit {
+  text-align: center;
+  margin-top: 50px;
+}
+#exit button {
+  background: #ff6694;
+  border: none;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 5px;
 }
 </style>
 

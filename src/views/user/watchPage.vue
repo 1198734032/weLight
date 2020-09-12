@@ -66,7 +66,7 @@ export default {
             // src: 'http://ivi.bupt.edu.cn/hls/cctv1.m3u8'// 视频url地址
             // src:'/hls/me.m3u8'
             // type: "rtmp/mp4",
-            type: 'rtmp/flv',
+            type: "rtmp/flv",
             src: "",
           },
         ],
@@ -96,8 +96,8 @@ export default {
     // console.log("src-------"+this.room.movie.src);
     // this.playerOptions.sources[0].src='http://ivi.bupt.edu.cn/hls/cctv1.m3u8';
     // this.playerOptions.sources[0].src = "rtmp://58.200.131.2:1935/livetv/hunantv";
-    this.playerOptions.sources[0].src =  this.room.movie.src ;
-    console.log(this.playerOptions.sources[0].src)
+    this.playerOptions.sources[0].src = this.room.movie.src;
+    console.log(this.playerOptions.sources[0].src);
     // console.log(this.room.movie.src)
 
     this.initWebsocket();
@@ -116,10 +116,6 @@ export default {
             )}解散，即将返回首页!`,
           })
         );
-        // alert(res.data.Msg + "即将返回首页");
-        // this.isConnect = false;
-        // this.websocket.close();
-        // this.$router.push("/user");
       });
     },
 
@@ -132,8 +128,22 @@ export default {
 
     //聊天
     subMsg() {
-      if (!sessionStorage.getItem("userName")) return alert("请先登录！");
-      if (!this.my_ipt) return alert("发送内容不能为空哟~");
+      if (!sessionStorage.getItem("userName")) {
+        this.$alert("请先登录", "提示", {
+          confirmButtonText: "确定",
+           callback: action => {
+          }
+        });
+        return;
+      }
+      if (!this.my_ipt) {
+        this.$alert("发送内容不能为空！", "提示", {
+          confirmButtonText: "确定",
+           callback: action => {
+          }
+        });
+        return;
+      }
       this.websocket.send(
         JSON.stringify({
           text: this.my_ipt,
@@ -159,10 +169,14 @@ export default {
         let data = JSON.parse(event.data);
         if (!data.msg) return this.chat_msg.push(data);
         else {
-          alert(data.msg);
-          this.isConnect = false;
-          this.websocket.close();
-          this.$router.push("/user");
+          this.$alert(`此房间已经被 ${data.msg} 解散，即将返回首页`, "提示", {
+            confirmButtonText: "确定",
+            callback: (action) => {
+              this.isConnect = false;
+              this.websocket.close();
+              this.$router.push("/user");
+            },
+          });
         }
       };
 

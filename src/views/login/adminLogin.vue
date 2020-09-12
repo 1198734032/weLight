@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <back/>
     <login @login="login"></login>
   </div>
 </template>
@@ -12,9 +13,12 @@
 import { adminLogin } from "@/network/adminLogin/adminLogin.js";
 
 import login from "@/components/login/login.vue";
+import back from "@/components/back/back.vue";
+
 export default {
   components: {
     login,
+    back
   },
   data() {
     return {
